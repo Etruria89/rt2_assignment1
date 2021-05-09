@@ -1,5 +1,11 @@
-int32 order
+# goal
+float32 x
+float32 y
+float32 theta
 ---
-int32 result
+# result
+bool reached
 ---
-int32 feedback
+#feedback
+## current pose
+string status
