@@ -7,5 +7,4 @@ float32 theta
 bool reached
 ---
 #feedback
-## current pose
 string status
