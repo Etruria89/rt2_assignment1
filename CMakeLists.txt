@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(manual_composition_package)
+project(rt2_assignment1)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -20,63 +20,37 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rclcpp_components REQUIRED)
-find_package(example_interfaces REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-include_directories(include)
+rosidl_generate_interfaces(${PROJECT_NAME}
+	"srv/Command.srv"
+	"srv/RandomPosition.srv"
+	"srv/Position.srv"
+	DEPENDENCIES std_msgs
+)
 
-add_library(manual_talker_component SHARED
-  src/publisher.cpp)
+add_library(random_service_comp SHARED
+  src/position_service.cpp)
   
-add_library(manual_listener_component SHARED
-  src/subscriber.cpp)
-
-add_library(manual_server_component SHARED
-  src/server.cpp)
-
-add_library(manual_client_component SHARED
-  src/client.cpp)
-
+rosidl_target_interfaces(random_service_comp
+	${PROJECT_NAME} "rosidl_typesupport_cpp")
   
-rclcpp_components_register_node(manual_talker_component
-  PLUGIN "manual_composition_package::MinimalPublisher"
-  EXECUTABLE comp_publisher)
+rclcpp_components_register_node(random_service_comp
+  PLUGIN "rt2_assignment1::RPS"
+  EXECUTABLE position_service)    
+# The executable can be run as standalone node while the "random_service_comp" is the component
   
-rclcpp_components_register_node(manual_listener_component
-  PLUGIN "manual_composition_package::MinimalSubscriber"
-  EXECUTABLE comp_subscriber)
-  
-rclcpp_components_register_node(manual_server_component
-  PLUGIN "manual_composition_package::MinimalServer"
-  EXECUTABLE comp_server)
-  
-rclcpp_components_register_node(manual_client_component
-  PLUGIN "manual_composition_package::MinimalClient"
-  EXECUTABLE comp_client)
-  
-ament_target_dependencies(manual_talker_component rclcpp rclcpp_components std_msgs)
-ament_target_dependencies(manual_listener_component rclcpp rclcpp_components std_msgs)
-ament_target_dependencies(manual_server_component rclcpp rclcpp_components example_interfaces)
-ament_target_dependencies(manual_client_component rclcpp rclcpp_components example_interfaces)
-
-add_executable(manual_composition
-  src/m_composition.cpp)
-  
-target_link_libraries(manual_composition
-  manual_talker_component
-  manual_listener_component
-  manual_client_component
-  manual_server_component)
-  
-ament_target_dependencies(manual_composition rclcpp rclcpp_components std_msgs example_interfaces)
+ament_target_dependencies(random_service_comp rclcpp rclcpp_components std_msgs)
 
 install(TARGETS
-   manual_talker_component
-   manual_listener_component
-   manual_server_component
-   manual_client_component
-   manual_composition
+  random_service_comp
   DESTINATION lib/${PROJECT_NAME}
-  LIBRARY DESTINATION lib)
+  LIBRARY DESTINATION lib) #This lib has to be added for the components only
+  
+install(
+	FILES rt2_mapping.yaml
+	DESTINATION share/${PROJECT_NAME}
+)
   
 install(
   DIRECTORY launch
