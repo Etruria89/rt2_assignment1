@@ -18,32 +18,46 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
 	"srv/Command.srv"
-	"srv/RandomPosition.srv"
 	"srv/Position.srv"
-	DEPENDENCIES std_msgs
+	"srv/RandomPosition.srv"
 )
 
-add_library(random_service_comp SHARED
+ament_export_dependencies(rosidl_default_runtime)
+
+add_library(random_position_service SHARED
   src/position_service.cpp)
   
-rosidl_target_interfaces(random_service_comp
-	${PROJECT_NAME} "rosidl_typesupport_cpp")
+add_library(finite_state_machine SHARED
+  src/state_machine.cpp)
+
   
-rclcpp_components_register_node(random_service_comp
+rclcpp_components_register_node(random_position_service
   PLUGIN "rt2_assignment1::RPS"
-  EXECUTABLE position_service)    
-# The executable can be run as standalone node while the "random_service_comp" is the component
+  EXECUTABLE comp_position_service)    
+# The main can be run as standalone node while the "comp_random_service" is the component
+rclcpp_components_register_node(finite_state_machine
+  PLUGIN "rt2_assignment1::FSM"
+  EXECUTABLE comp_state_machine)
+
   
-ament_target_dependencies(random_service_comp rclcpp rclcpp_components std_msgs)
+ament_target_dependencies(random_position_service rclcpp rclcpp_components)
+ament_target_dependencies(finite_state_machine rclcpp rclcpp_components)
+
+  
+rosidl_target_interfaces(random_position_service
+	${PROJECT_NAME} "rosidl_typesupport_cpp")
+	
+rosidl_target_interfaces(finite_state_machine
+	${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 install(TARGETS
-  random_service_comp
+  random_position_service   finite_state_machine
+  comp_position_service     comp_state_machine
   DESTINATION lib/${PROJECT_NAME}
   LIBRARY DESTINATION lib) #This lib has to be added for the components only
   

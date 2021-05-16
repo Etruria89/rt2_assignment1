@@ -1,5 +1,6 @@
 #include <inttypes.h>
 #include <memory>
+
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_components/register_node_macro.hpp"
 
@@ -17,7 +18,7 @@ namespace rt2_assignment1
 	{
 		public:
 		
-			RPS(const rclcpp::NodeOptions & options) : Node("random_position_rervice", options)
+			RPS(const rclcpp::NodeOptions & options) : Node("random_position_service", options)
 			{ 
 				// create a new service to provide the random position when requested
 				service_ = this->create_service<RandomPosition>("/position_server", std::bind(&RPS::my_random, this, _1, _2, _3));
