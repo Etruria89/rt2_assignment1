@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.5)
 project(rt2_assignment1)
 
@@ -22,11 +23,10 @@ find_package(rclcpp_components REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-	"srv/Command.srv"
-	"srv/Position.srv"
-	"srv/RandomPosition.srv"
+    "srv/Command.srv"
+    "srv/Position.srv"
+    "srv/RandomPosition.srv"
 )
-
 ament_export_dependencies(rosidl_default_runtime)
 
 add_library(random_position_service SHARED
@@ -56,21 +56,20 @@ rosidl_target_interfaces(finite_state_machine
 	${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 install(TARGETS
-  random_position_service   finite_state_machine
-  comp_position_service     comp_state_machine
-  DESTINATION lib/${PROJECT_NAME}
-  LIBRARY DESTINATION lib) #This lib has to be added for the components only
-  
-install(
-	FILES rt2_mapping.yaml
-	DESTINATION share/${PROJECT_NAME}
-)
-  
-install(
-  DIRECTORY launch
-  DESTINATION share/${PROJECT_NAME}
+    random_position_service finite_state_machine
+    comp_position_service comp_state_machine
+    DESTINATION lib/${PROJECT_NAME}
+    LIBRARY DESTINATION lib
 )
 
+install(
+    FILES rt2_mapping.yaml
+    DESTINATION share/${PROJECT_NAME}
+)
+install(
+    DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
