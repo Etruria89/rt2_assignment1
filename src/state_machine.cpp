@@ -9,6 +9,8 @@
 #include "rt2_assignment1/srv/position.hpp"
 #include "rt2_assignment1/srv/random_position.hpp"
 
+using namespace std::chrono_literals;
+
 using Command = rt2_assignment1::srv::Command;
 using Position = rt2_assignment1::srv::Position;
 using RandomPosition = rt2_assignment1::srv::RandomPosition;
@@ -26,16 +28,26 @@ namespace rt2_assignment1
 			FSM(const rclcpp::NodeOptions & options) : Node("state_machine", options)
 			{ 
 				
-				// Service and client initialization
-				service_gui = this->create_service<Command>("/user_interface", std::bind(&FSM::user_interface, this, _1, _2, _3));
-				client_go_to = this->create_client<Position>("/go_to_point");	
-				client_random = this->create_client<RandomPosition>("/position_server");	
-				
 				//State varaible initialization
 				start = false;
 				goal_reached = true;
 				
+				// Service and client initialization
+				service_gui = this->create_service<Command>("/user_interface", std::bind(&FSM::user_interface, this, _1, _2, _3));
 				
+				client_random = this->create_client<RandomPosition>("/position_server");	
+								
+				while (!client_random->wait_for_service(std::chrono::seconds(3)))
+				{
+					if (!rclcpp::ok()) 
+					{
+						RCLCPP_ERROR(this->get_logger(), "client interrupted while waiting for random position service to appear.");
+						return;
+					}
+					RCLCPP_INFO(this->get_logger(), "waiting for random position service to appear...");
+				}   				
+				
+				client_go_to = this->create_client<Position>("/go_to_point");	
 				while (!client_go_to->wait_for_service(std::chrono::seconds(3)))
 				{
 					if (!rclcpp::ok()) 
@@ -45,15 +57,7 @@ namespace rt2_assignment1
 					}
 					RCLCPP_INFO(this->get_logger(), "waiting for service to appear...");
 				}
-				while (!client_random->wait_for_service(std::chrono::seconds(3)))
-				{
-					if (!rclcpp::ok()) 
-					{
-						RCLCPP_ERROR(this->get_logger(), "client interrupted while waiting for random position service to appear.");
-						return;
-					}
-					RCLCPP_INFO(this->get_logger(), "waiting for random position service to appear...");
-				}   
+
 				
 				rp_req = std::shared_ptr<RandomPosition::Request>();
 				rp_resp = std::shared_ptr<RandomPosition::Response>();
@@ -66,25 +70,12 @@ namespace rt2_assignment1
 				rp_req->y_min = -5.0;
 				
 				//Periodic status check
-				timer_ = this->create_wall_timer(std::chrono::milliseconds(2000), std::bind(&FSM::status_check, this));
+				timer_ = this->create_wall_timer(2000ms, std::bind(&FSM::status_check, this));
    				
 			}
 			
 			  
-		private:
-		
-			bool start;
-			bool goal_reached;
-					
-			rclcpp::Service<Command>::SharedPtr service_gui;          	
-			rclcpp::Client<RandomPosition>::SharedPtr client_random;    
-			rclcpp::Client<Position>::SharedPtr client_go_to;           
-
-			std::shared_ptr<RandomPosition::Request> rp_req;    
-			std::shared_ptr<RandomPosition::Response> rp_resp;  
-			std::shared_ptr<Position::Request> p_req;           
-  
-			rclcpp::TimerBase::SharedPtr timer_; 		
+		private: 		
 					
 			void status_check()
 			{
@@ -100,8 +91,7 @@ namespace rt2_assignment1
 			void go_to_point()
 			{
 				
-				auto response_rp_received_callback = [this](rclcpp::Client<rt2_assignment1::srv::RandomPosition>::SharedFuture future){rp_resp = future.get();};
-				auto future_point = client_random->async_send_request(rp_req,response_rp_received_callback);	
+				call_randomPosition();	
 				
 				goal_reached = false;	
 				
@@ -109,22 +99,30 @@ namespace rt2_assignment1
 				p_req->y = rp_resp->y;
 				p_req->theta = rp_resp->theta;
 				
-				// If we reached the goal set the flag goal_reached to true
+				RCLCPP_INFO(this->get_logger(), "Going to the position: x= %f y= %f theta= %f",
+            				p_req->x, p_req->y, p_req->theta);
+            				
+				// Goal reached
 				auto point_reached_callback = [this](rclcpp::Client<rt2_assignment1::srv::Position>::SharedFuture future){(void)future; goal_reached = true;
-				RCLCPP_INFO(this->get_logger(), "Goal reached!");};
+               			RCLCPP_INFO(this->get_logger(), "Mission complete!");};
 				auto future_result = client_go_to->async_send_request(p_req, point_reached_callback);
 				
 			}
+			
+			void call_randomPosition()
+			{
+			    auto RP = [this](rclcpp::Client<rt2_assignment1::srv::RandomPosition>::SharedFuture future){rp_resp = future.get();};
+			    auto future_result = client_random->async_send_request(rp_req,RP);
+			}
 
 
-			bool user_interface(
+			void user_interface(
 				const std::shared_ptr<rmw_request_id_t> request_header,
 				const std::shared_ptr<Command::Request> req, 
 				const std::shared_ptr<Command::Response> res)
 			{	
 				(void) request_header;
-				bool start = false;
-				
+								
 				if (req->command == "start")
 				{
 					start = true;
@@ -134,14 +132,24 @@ namespace rt2_assignment1
 					start = false;
 				}
 				res->ok = start;
-				
-				return true;
+				RCLCPP_INFO(this->get_logger(), "Command received!");
 			}
+			
+			bool start;
+			bool goal_reached;
+					
+			rclcpp::Service<Command>::SharedPtr service_gui;          	
+			rclcpp::Client<RandomPosition>::SharedPtr client_random;    
+			rclcpp::Client<Position>::SharedPtr client_go_to;           
 
-
-				
+			std::shared_ptr<RandomPosition::Request> rp_req;    
+			std::shared_ptr<RandomPosition::Response> rp_resp;  			
+			std::shared_ptr<Position::Request> p_req;           
+  
+			rclcpp::TimerBase::SharedPtr timer_;				
 	
 	};
 }
+
 
 RCLCPP_COMPONENTS_REGISTER_NODE(rt2_assignment1::FSM)

@@ -18,7 +18,7 @@ namespace rt2_assignment1
 	{
 		public:
 		
-			RPS(const rclcpp::NodeOptions & options) : Node("random_position_service", options)
+			RPS(const rclcpp::NodeOptions & options) : Node("random_position_server", options)
 			{ 
 				// create a new service to provide the random position when requested
 				service_ = this->create_service<RandomPosition>("/position_server", std::bind(&RPS::my_random, this, _1, _2, _3));
@@ -33,7 +33,7 @@ namespace rt2_assignment1
 			}
 
 
-			bool my_random (
+			void my_random (
 				const std::shared_ptr<rmw_request_id_t> request_header,
 				const std::shared_ptr<RandomPosition::Request> req, 
 				const std::shared_ptr<RandomPosition::Response> res)
@@ -42,7 +42,6 @@ namespace rt2_assignment1
 				res->x = randMToN(req->x_min, req->x_max);
 				res->y = randMToN(req->y_min, req->y_max);
 				res->theta = randMToN(-3.14, 3.14);
-				return true;
 			}
 	
 		rclcpp::Service<RandomPosition>::SharedPtr service_; 

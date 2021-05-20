@@ -1,0 +1,2 @@
+Invoking command in '/root/my_ros2_ws/src/rt2_assignment1/build/rt2_assignment1': /usr/bin/cmake /root/my_ros2_ws/src/rt2_assignment1 -DCMAKE_INSTALL_PREFIX=/root/my_ros2_ws/src/rt2_assignment1/install/rt2_assignment1
+Invoked command in '/root/my_ros2_ws/src/rt2_assignment1/build/rt2_assignment1' returned '1': /usr/bin/cmake /root/my_ros2_ws/src/rt2_assignment1 -DCMAKE_INSTALL_PREFIX=/root/my_ros2_ws/src/rt2_assignment1/install/rt2_assignment1

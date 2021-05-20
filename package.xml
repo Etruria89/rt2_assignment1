@@ -16,7 +16,7 @@
 
   <export>
     <build_type>ament_cmake</build_type>
-    <ros1_bridge mapping_rules="rt2_mapping.yaml"/>
+    <ros1_bridge mapping_rules="mapping_rules.yaml"/>
   </export>
   
   <member_of_group>rosidl_interface_packages</member_of_group>

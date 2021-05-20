@@ -29,41 +29,40 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 )
 ament_export_dependencies(rosidl_default_runtime)
 
-add_library(random_position_service SHARED
+add_library(RPS SHARED
   src/position_service.cpp)
   
-add_library(finite_state_machine SHARED
+add_library(FSM SHARED
   src/state_machine.cpp)
 
   
-rclcpp_components_register_node(random_position_service
+rclcpp_components_register_node(RPS
   PLUGIN "rt2_assignment1::RPS"
   EXECUTABLE comp_position_service)    
-# The main can be run as standalone node while the "comp_random_service" is the component
-rclcpp_components_register_node(finite_state_machine
+rclcpp_components_register_node(FSM
   PLUGIN "rt2_assignment1::FSM"
   EXECUTABLE comp_state_machine)
 
   
-ament_target_dependencies(random_position_service rclcpp rclcpp_components)
-ament_target_dependencies(finite_state_machine rclcpp rclcpp_components)
+ament_target_dependencies(RPS rclcpp rclcpp_components)
+ament_target_dependencies(FSM rclcpp rclcpp_components)
 
   
-rosidl_target_interfaces(random_position_service
+rosidl_target_interfaces(RPS
 	${PROJECT_NAME} "rosidl_typesupport_cpp")
 	
-rosidl_target_interfaces(finite_state_machine
+rosidl_target_interfaces(FSM
 	${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 install(TARGETS
-    random_position_service finite_state_machine
+    RPS FSM
     comp_position_service comp_state_machine
     DESTINATION lib/${PROJECT_NAME}
     LIBRARY DESTINATION lib
 )
 
 install(
-    FILES rt2_mapping.yaml
+    FILES mapping_rules.yaml
     DESTINATION share/${PROJECT_NAME}
 )
 install(
