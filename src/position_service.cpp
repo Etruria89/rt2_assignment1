@@ -13,6 +13,12 @@ using std::placeholders::_3;
 
 namespace rt2_assignment1
 {
+/****************************************//**
+* Server to generate a random position
+*
+* This server provides the  '/position_server'
+* service via the node random_position_server.
+********************************************/
 	
 	class RPS : public rclcpp::Node
 	{
@@ -25,14 +31,35 @@ namespace rt2_assignment1
 			}
 	
 		private:
-
+			  /****************************************//**
+			  * Generate a random number
+			  *
+			  * \param M (double):
+			  *   Lower bound.
+			  * \param N (double):
+			  *   Upper bound.
+			  *
+			  * \return randMToN (double):
+			  *   random number, between M and N.
+			  *
+			  ********************************************/
 
 			double randMToN(double M, double N)
 			{     
 				return M + (rand() / ( RAND_MAX / (N-M) ) ) ; 
 			}
 
-
+			  /****************************************//**
+			  * Service callback to define the robot target pose
+			  * 			  *
+			  * \param request_header (const std::shared_ptr<rmw_request_id_t>):
+			  *   Service call header (unused).
+			  * \param req (const std::shared_ptr<RandomPosition::Request>):
+			  *   Service request, containing the x and y ranges.
+			  * \param res (const std::shared_ptr<RandomPosition::Response>):
+			  *   Service response, containing the robot pose.
+			  *
+			  ********************************************/
 			void my_random (
 				const std::shared_ptr<rmw_request_id_t> request_header,
 				const std::shared_ptr<RandomPosition::Request> req, 

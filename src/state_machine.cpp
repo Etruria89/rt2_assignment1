@@ -71,7 +71,7 @@ namespace rt2_assignment1
 				rp_req->y_min = -5.0;
 				
 				//Periodic status check
-				RCLCPP_INFO(this->get_logger(), "STATUS UNCER VERIFICATION...");
+				RCLCPP_INFO(this->get_logger(), "STATUS UNDER VALIDATION...");
 				timer_ = this->create_wall_timer(2000ms, std::bind(&FSM::status_check, this));
    				
 			}			
