@@ -1,8 +1,33 @@
-# First Assignment of the Research Track 2 course (Robotics Engineering / JEMARO, Unige)
+# Research Track 2 - assignment 1
 
-The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment.
-To launch the node, please run:
+#### Vrep scene
+
 ```
-rosrun rt2_assignment1 sim.launch
+rt2_assignment1/
+  |
+  launch/         - launch files
+    |
+    sim.launch            - Gazebo simulation
+    ros2_bridge.launch     - python scripts only launch
+    sim_vrep.launch   - nodes only launch
+  scripts/        - python scripts
+    |
+    go_to_point.py        - pyhton script controlling the robot
+    user_interface.py     - command line interface
+  src/            - C++ source code
+    |
+    position_service.cpp  - returns random position
+    state_machine.cpp     - manages the FSM logic
+  srv/            - custom services
+    !
+    Command.srv           - user interface input
+    Position.srv          - goal position
+    RandomPosition.srv    - random pose generator
+  urdf/           - robot description for Gazebo simulation
+    |
+    my_robot.urdf         - mobile robot description
+  pioneer_fd.ttt     - Pioneer p3dx scene
+  CMakeLists.txt     - CMake file
+  package.xml        - manifest
 ```
 
