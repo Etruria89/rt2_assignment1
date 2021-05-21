@@ -34,7 +34,7 @@ namespace rt2_assignment1
 				
 				// Service and client initialization
 				service_gui = this->create_service<Command>("/user_interface", std::bind(&FSM::user_interface, this, _1, _2, _3));
-				
+				client_go_to = this->create_client<Position>("/go_to_point");				
 				client_random = this->create_client<RandomPosition>("/position_server");	
 								
 				while (!client_random->wait_for_service(std::chrono::seconds(3)))
@@ -44,10 +44,10 @@ namespace rt2_assignment1
 						RCLCPP_ERROR(this->get_logger(), "client interrupted while waiting for random position service to appear.");
 						return;
 					}
-					RCLCPP_INFO(this->get_logger(), "waiting for random position service to appear...");
+					RCLCPP_INFO(this->get_logger(), "waiting for random position service RANDOM POSITION to appear...");
 				}   				
-				
-				client_go_to = this->create_client<Position>("/go_to_point");	
+				RCLCPP_INFO(this->get_logger(), "CONNECTED TO RANDOM POSITION SERVICE...");
+									
 				while (!client_go_to->wait_for_service(std::chrono::seconds(3)))
 				{
 					if (!rclcpp::ok()) 
@@ -55,13 +55,14 @@ namespace rt2_assignment1
 						RCLCPP_ERROR(this->get_logger(), "client interrupted while waiting for go to point service to appear.");
 						return;
 					}
-					RCLCPP_INFO(this->get_logger(), "waiting for service to appear...");
+					RCLCPP_INFO(this->get_logger(), "waiting for service POSITION to appear...");
 				}
 
+				RCLCPP_INFO(this->get_logger(), "CONNECTED TO POSITION SERVICE...");
 				
-				rp_req = std::shared_ptr<RandomPosition::Request>();
-				rp_resp = std::shared_ptr<RandomPosition::Response>();
-				p_req = std::shared_ptr<Position::Request>();
+				rp_req = std::make_shared<RandomPosition::Request>();
+				rp_resp = std::make_shared<RandomPosition::Response>();
+				p_req = std::make_shared<Position::Request>();
 				
 				 
 				rp_req->x_max = 5.0;
@@ -70,10 +71,10 @@ namespace rt2_assignment1
 				rp_req->y_min = -5.0;
 				
 				//Periodic status check
+				RCLCPP_INFO(this->get_logger(), "STATUS UNCER VERIFICATION...");
 				timer_ = this->create_wall_timer(2000ms, std::bind(&FSM::status_check, this));
    				
-			}
-			
+			}			
 			  
 		private: 		
 					
@@ -83,7 +84,8 @@ namespace rt2_assignment1
 			
 				if (!start) return;
 			
-				go_to_point();					
+				go_to_point();	
+				RCLCPP_INFO(this->get_logger(), "GO TO POINT RUN...");				
 			
 			}		
 			

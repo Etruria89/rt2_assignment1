@@ -1,4 +1,3 @@
-
 cmake_minimum_required(VERSION 3.5)
 project(rt2_assignment1)
 
@@ -22,6 +21,7 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
+# Services
 rosidl_generate_interfaces(${PROJECT_NAME}
     "srv/Command.srv"
     "srv/Position.srv"
@@ -29,27 +29,29 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 )
 ament_export_dependencies(rosidl_default_runtime)
 
+# Random position server
 add_library(RPS SHARED
-  src/position_service.cpp)
-  
-add_library(FSM SHARED
-  src/state_machine.cpp)
-
+  src/position_service.cpp) 
   
 rclcpp_components_register_node(RPS
   PLUGIN "rt2_assignment1::RPS"
   EXECUTABLE comp_position_service)    
-rclcpp_components_register_node(FSM
-  PLUGIN "rt2_assignment1::FSM"
-  EXECUTABLE comp_state_machine)
-
   
-ament_target_dependencies(RPS rclcpp rclcpp_components)
-ament_target_dependencies(FSM rclcpp rclcpp_components)
+ament_target_dependencies(RPS rclcpp rclcpp_components) 
 
-  
 rosidl_target_interfaces(RPS
 	${PROJECT_NAME} "rosidl_typesupport_cpp")
+	  
+# Finite state machine
+add_library(FSM SHARED
+  src/state_machine.cpp)
+    
+rclcpp_components_register_node(FSM
+  PLUGIN "rt2_assignment1::FSM"
+  EXECUTABLE comp_state_machine)  
+
+ament_target_dependencies(FSM rclcpp rclcpp_components)  
+
 	
 rosidl_target_interfaces(FSM
 	${PROJECT_NAME} "rosidl_typesupport_cpp")
