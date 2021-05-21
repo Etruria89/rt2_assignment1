@@ -5,7 +5,6 @@
 ```
 rt2_assignment1/
   |
-  doc/            - documentation
   launch/         - launch files
     |
     ros2_bridge_run.py            - nodes launcher
@@ -18,6 +17,7 @@ rt2_assignment1/
     Command.srv           - user interface service
     Position.srv          - goal position service
     RandomPosition.srv    - random position service
+  doc/            - documentation
   CMakeLists.txt  - CMake file
   ros2_bash.sh  - bash script to runthe simulation with all the required nodes
   mapping_rules.yaml  - ros1_bridge mapping file
