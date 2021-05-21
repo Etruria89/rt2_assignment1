@@ -20,6 +20,18 @@ using std::placeholders::_2;
 using std::placeholders::_3;
 
 namespace rt2_assignment1
+/****************************************//**
+* Finite State machine node 
+*
+* This component receives the user requests:
+* if a movement is requested the robot retrieves a 
+* a random goal pose from the
+* '/position_server' and it forwards it to
+* the 'go_to_point' service; once the goal
+* is reached the process is repeated, until
+* the user asks for the robot to stop.
+*
+********************************************/
 {
 	class FSM : public rclcpp::Node
 	{
@@ -27,6 +39,13 @@ namespace rt2_assignment1
 		
 			FSM(const rclcpp::NodeOptions & options) : Node("state_machine", options)
 			{ 
+			  /****************************************//**
+			  * Constructor, instanciates a server, two
+			  * clients and initialize the variables.
+			  *
+			  * \param options (const rclcpp::NodeOptions &):
+			  *   Used to run this node as a component
+			  ********************************************/
 				
 				//State varaible initialization
 				start = false;
@@ -76,8 +95,15 @@ namespace rt2_assignment1
    				
 			}			
 			  
-		private: 		
-					
+		private: 	
+			  /****************************************//**
+			  * Periodic status check of the robot
+			  *
+			  * This function checks if a new goal should be
+			  * retrieved and forwarded to the go_to_point node.
+			  *
+			  ********************************************/
+								
 			void status_check()
 			{
 				if (!goal_reached) return;
@@ -89,7 +115,19 @@ namespace rt2_assignment1
 			
 			}		
 			
-			
+			 /****************************************//**
+			  * Retrieve and set a new goal
+			  *
+			  * The goal pose is retrieved from the
+			  * '/position_server' service and then passed
+			  * as the request to the '/go_to_point'
+			  * service in order to set the robot goal.
+			  * Once this last service call returns a
+			  * callback is issued setting the goal as
+			  * reached.
+
+			  *
+			  ********************************************/ 		
 			void go_to_point()
 			{
 				
@@ -111,13 +149,32 @@ namespace rt2_assignment1
 				
 			}
 			
+			  
+			  /****************************************//**
+			  * Retrieve the goal pose
+			  *
+			  * The goal pose is retrieved from the
+			  * '/position_server' service. 
+			  *
+			  ********************************************/ 
 			void call_randomPosition()
 			{
 			    auto RP = [this](rclcpp::Client<rt2_assignment1::srv::RandomPosition>::SharedFuture future){rp_resp = future.get();};
 			    auto future_result = client_random->async_send_request(rp_req,RP);
 			}
 
-
+			  /****************************************//**
+			  * Service callback setting the start/stop
+			  * robot state
+			  *
+			  * \param request_header (const std::shared_ptr<rmw_request_id_t>):
+			  *   Service call header (unused).
+			  * \param req (const std::shared_ptr<Command::Request>):
+			  *   Service request, containing the command (string).
+			  * \param res (const std::shared_ptr<Command::Response>):
+			  *   Service response, the value of the 'start' state (bool).
+			  *
+			  ********************************************/ 
 			void user_interface(
 				const std::shared_ptr<rmw_request_id_t> request_header,
 				const std::shared_ptr<Command::Request> req, 
