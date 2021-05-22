@@ -25,8 +25,9 @@ rt2_assignment1/
     Command.srv           - user interface input
     RandomPosition.srv    - random position service
   urdf/           - robot description for Gazebo simulation
-    |
+    |  
     my_robot.urdf         - mobile robot description
+  docs/
   CMakeLists.txt  - CMake file
   package.xml     - manifest
 ```
