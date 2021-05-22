@@ -3,6 +3,11 @@ import time
 from rt2_assignment1.srv import Command
 
 def main():
+    """
+    Definition of the command line
+    user interface to set the "start"
+    "stop" varaible.
+    """
     rospy.init_node('user_interface')
     ui_client = rospy.ServiceProxy('/user_interface', Command)
     time.sleep(10)
