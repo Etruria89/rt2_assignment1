@@ -40,7 +40,7 @@ This package controls a mobile non-holonomic robot with a 'go_to_point' logic,
 4. having reached the [x,y] goal position the robot turns in place in order to match the goal _theta_;
 5. if the user does not stop the robot GOTO step 1, otherwise stay still until asked to start again, then GOTO step 1;
 
-Since the user request is here implemented as an action it can be preempted, stoppinng the robot at any time and then restarting it when issuing a new goal.
+The user request is here implemented as an action it can be preempted, stoppinng the robot at any time and then restarting it when issuing a new goal.
 
 ## Content Explanation
 
@@ -54,10 +54,12 @@ Whilst the last two are C++ based nodes
 
 ## Compiling
 
-Compilation can be carried out as always with
+The compilation of this package can be carried out typing in the workspace directory of ROS:
+
 ```bash
-path/to/ros_ws/$ catkin_make
+.../my_ros_ws/$ catkin_make
 ```
+from a terminal in which the ROS noetic varibles have been properly sourced
 
 ## Running
 
