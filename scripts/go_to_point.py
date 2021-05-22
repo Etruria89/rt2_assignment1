@@ -33,6 +33,12 @@ lb_a = -0.5
 ub_d = 0.6
 
 def clbk_odom(msg):
+    """
+    Odometry callback
+    Retrieve (x,y,z and theta) from the Odom message.
+    Args:
+      msg (Odometry): odometry message.
+    """
     global position_
     global yaw_
 
@@ -50,6 +56,10 @@ def clbk_odom(msg):
 
 
 def change_state(state):
+    """
+    Update the current global state
+    Args: state (int):  new state
+    """
     global state_
     state_ = state
     print ('State changed to [%s]' % state_)
@@ -61,6 +71,11 @@ def normalize_angle(angle):
     return angle
 
 def fix_yaw(des_yaw, next_state):
+    """
+    Orient the robot in a desired way
+    Args:  des_yaw (float):  desired yaw
+      next_state (int): next state to set
+    """
     err_yaw = normalize_angle(des_yaw - yaw_)
     rospy.loginfo(err_yaw)
     twist_msg = Twist()
@@ -78,6 +93,14 @@ def fix_yaw(des_yaw, next_state):
 
 
 def go_straight_ahead(des_pos):
+    """
+    Move straignt to the target
+    Set the linear and angular speed
+    depending on the distance to the 
+    goal pose.
+    Args:
+      des_pos (Point):  desired (x, y) position
+    """
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = desired_yaw - yaw_
     err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
@@ -119,12 +142,26 @@ def fix_final_yaw(des_yaw):
         change_state(3)
         
 def done():
+    """
+    Stop the robot
+    Set the robot velocities to 0.
+    """
     twist_msg = Twist()
     twist_msg.linear.x = 0
     twist_msg.angular.z = 0
     pub_.publish(twist_msg)
     
 def go_to_point(goal):
+    """
+    Set the appropriate behaviour depending
+    on the current robot state, in orderd
+    to reach the goal.
+    The state machine keeps running until
+    the goal is reached or the action is
+    preempted (the goal gets cancelled).
+    Args:
+      goal (PoseActionGoal): (x,y,theta) goal pose
+    """
     global act_s
     
     desired_position = Point()
@@ -180,6 +217,10 @@ def go_to_point(goal):
 
 
 def main():
+    """
+    Main function to manage 
+    the robot behaviour
+    """
     global pub_, act_s
     rospy.init_node('go_to_point')
     pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
