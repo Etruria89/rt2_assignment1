@@ -1,0 +1,15 @@
+\hypertarget{namespacert2__assignment1}{}\doxysection{rt2\+\_\+assignment1 Namespace Reference}
+\label{namespacert2__assignment1}\index{rt2\_assignment1@{rt2\_assignment1}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classrt2__assignment1_1_1_f_s_m}{F\+SM}}
+\item 
+class \mbox{\hyperlink{classrt2__assignment1_1_1_r_p_s}{R\+PS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Finite State machine node
+
+This component receives the user requests\+: if a movement is requested the robot retrieves a a random goal pose from the \textquotesingle{}/position\+\_\+server\textquotesingle{} and it forwards it to the \textquotesingle{}go\+\_\+to\+\_\+point\textquotesingle{} service; once the goal is reached the process is repeated, until the user asks for the robot to stop. 
