@@ -44,18 +44,13 @@ Here below is reported the structure of this robot motion control algorithm:
 ![package_tree](rt2_action.png)
 
 More in detail, two nodes are implemented as python scripts
-- **go_to_point.py**: the action server managing the robot speed control depending on the goal received.
-- **user_interface.py**:  the simple command line user interface, which sends the requests to start/stop the go_to_point behaviour.
+- **go_to_point**: (*go_to_point.py*) the action server managing the robot speed control depending on the goal received. This node publishes on the topics /cmd_vel the velocity of the robot and read its position by subscribing the topic '/odom' 
+- **userinterface**: (*.user_interfacepy*)  the command line user interface, which sends the requests to start and stop the go_to_point behaviour.
 
 While other two nodes have been implemented in C++:
-- **position_service.cpp**: the server generating a random pose [x,y,theta] as a response to a request.
-- **state_machine.cpp**:  the FSM managing the request of a new goal pose when needed, sending it as a goal to 'go_to_point' action server.
+- **positionServer**: (*position_serivice.cpp*) the server node generating a random pose once requested.
+- **stateMachine**:  (*state_machine.cpp*) the finite state machine managing the request of a new goal pose when needed, sending it as a goal to 'go_to_point' action server.
 
----
-
-Finally, the control can be applied to a robot simulated using Coppeliasim (see **Requirements**), for which two scenes are here presented
-- **pioneer_scene.ttt**: a simple scene with a Pioneer p3dx non-holonomic mobile robot in an empty environment.
-- **robotnik_scene.ttt**: a simple scene with a Robotnik Summit XL140701 non-holonomic mobile robot in an empty environment.
 
 ## Compiling and Running
 
