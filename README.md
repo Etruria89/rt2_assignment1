@@ -1,7 +1,5 @@
 # Research Track 2 - assignment 1
 
-#### Marco Gabriele Fedozzi [50833565]
-
 ```
 rt2_assignment1/
   |
