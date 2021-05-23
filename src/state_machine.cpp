@@ -4,7 +4,17 @@
 #include "rt2_assignment1/RandomPosition.h"
 
 bool start = false;
-
+	  /****************************************//**
+	  * Service callback setting the start/stop
+	  * robot state
+	  *
+	  *   Service call header (unused).
+	  * \param req (const std::shared_ptr<Command::Request>):
+	  *   Service request, containing the command (string).
+	  * \param res (const std::shared_ptr<Command::Response>):
+	  *   Service response, the value of the 'start' state (bool).
+	  *
+	  ********************************************/ 
 bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Command::Response &res){
     if (req.command == "start"){
     	start = true;
@@ -15,7 +25,12 @@ bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Com
     return true;
 }
 
-
+	  /****************************************//**
+	  * Finite state machine definition
+	  *
+	  *   Service and client definition for robot cotnrol
+	  *
+	  ********************************************/ 
 int main(int argc, char **argv)
 {
    ros::init(argc, argv, "state_machine");
