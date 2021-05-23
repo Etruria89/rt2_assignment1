@@ -31,8 +31,7 @@ def clbk_odom(msg):
     Retrieve (x,y,z and theta) from the Odom message.
     Args:
       msg (Odometry): odometry message.
-    """
-    
+    """    
     global position_
     global yaw_
 
@@ -162,7 +161,8 @@ def go_to_point(req):
     The state machine keeps running until
     the goal is reached.
     Args:
-      req (PositionService request): (x,y,theta) target pose
+      req (PositionService request): 
+      (x,y,theta) target pose
     """
     desired_position = Point()
     desired_position.x = req.x
