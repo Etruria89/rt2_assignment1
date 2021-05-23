@@ -70,5 +70,6 @@ Known Issues and Limitations
 It has been encoutered several times after the first attempt to launch the simulation the robot keeps the velocity and it goes straight.
 In this case the coppelia scene has to be restarted as well as all the ros nodes. 
 
+
 Nodes:
 No documentation has been here reported for the LUA script file included in the Vrep scene.
