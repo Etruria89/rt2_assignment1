@@ -60,6 +60,11 @@ def change_state(state):
 
 
 def normalize_angle(angle):
+    """
+    Function to normalize an angle
+    Args: angle (float):  angle to be normalized
+    """    
+    
     if(math.fabs(angle) > math.pi):
         angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
     return angle
