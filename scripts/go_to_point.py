@@ -26,12 +26,6 @@ lb_a = -0.5
 ub_d = 0.6
 
 def clbk_odom(msg):
-    """
-    Odometry callback
-    Retrieve (x,y,z and theta) from the Odom message.
-    Args:
-      msg (Odometry): odometry message.
-    """    
     global position_
     global yaw_
 
@@ -49,30 +43,17 @@ def clbk_odom(msg):
 
 
 def change_state(state):
-    """
-    Update the current global state
-    Args: state (int):  new state
-    """
     global state_
     state_ = state
     print ('State changed to [%s]' % state_)
 
 
 def normalize_angle(angle):
-    """
-    Function to normalize an angle
-    Args: angle (float):  angle to be normalized
-    """    
-    
     if(math.fabs(angle) > math.pi):
         angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
     return angle
 
 def fix_yaw(des_pos):
-    """
-    Orient the robot toward the target position
-    Args:  des_pos (float):  desired yaw
-    """
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = normalize_angle(desired_yaw - yaw_)
     rospy.loginfo(err_yaw)
@@ -91,14 +72,6 @@ def fix_yaw(des_pos):
 
 
 def go_straight_ahead(des_pos):
-    """
-    Move straignt to the target
-    Set the linear and angular speed
-    depending on the distance to the 
-    goal pose.
-    Args:
-      des_pos (Point):  desired (x, y) position
-    """
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = desired_yaw - yaw_
     err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
@@ -124,10 +97,6 @@ def go_straight_ahead(des_pos):
         change_state(0)
 
 def fix_final_yaw(des_yaw):
-    """
-    Orient the robot in the desired target yaw
-    Args:  des_yaw (float):  desired yaw
-    """
     err_yaw = normalize_angle(des_yaw - yaw_)
     rospy.loginfo(err_yaw)
     twist_msg = Twist()
@@ -144,26 +113,12 @@ def fix_final_yaw(des_yaw):
         change_state(3)
         
 def done():
-    """
-    Stope the robot once the 
-    target pose is reached
-    """
     twist_msg = Twist()
     twist_msg.linear.x = 0
     twist_msg.angular.z = 0
     pub_.publish(twist_msg)
     
 def go_to_point(req):
-   """
-    Set the appropriate behaviour depending
-    on the current robot state, in orderd
-    to reach the goal.
-    The state machine keeps running until
-    the goal is reached.
-    Args:
-      req (PositionService request): 
-      (x,y,theta) target pose
-    """
     desired_position = Point()
     desired_position.x = req.x
     desired_position.y = req.y
@@ -182,9 +137,6 @@ def go_to_point(req):
     return True
 
 def main():
-    """
-    Main control function
-    """
     global pub_
     rospy.init_node('go_to_point')
     pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
