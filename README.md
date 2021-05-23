@@ -1,47 +1,16 @@
 # Research Track 2 - assignment 1
 
-<<<<<<< HEAD
-#### Vrep scene
-=======
-#### Action Task
->>>>>>> origin/action
+#### Marco Gabriele Fedozzi [50833565]
 
 ```
 rt2_assignment1/
   |
-<<<<<<< HEAD
-  launch/         - launch files
-    |
-    sim.launch            - Gazebo simulation
-    ros2_bridge.launch     - python scripts only launch
-    sim_vrep.launch   - nodes only launch
-  scripts/        - python scripts
-    |
-    go_to_point.py        - pyhton script controlling the robot
-    user_interface.py     - command line interface
-  src/            - C++ source code
-    |
-    position_service.cpp  - returns random position
-    state_machine.cpp     - manages the FSM logic
-  srv/            - custom services
-    !
-    Command.srv           - user interface input
-    Position.srv          - goal position
-    RandomPosition.srv    - random pose generator
-  urdf/           - robot description for Gazebo simulation
-    |
-    my_robot.urdf         - mobile robot description
-  pioneer_fd.ttt     - Pioneer p3dx scene
-  CMakeLists.txt     - CMake file
-  package.xml        - manifest
-=======
   action/         - action files
     |
-    Control2_1.action           - goal and monitoring action
-  doc/            - documentation
+    Control2_1.action           - action goal
   launch/         - launch files
     |
-    sim.launch            - launch file for simulation and nodes
+    sim.launch            - simulation launch
   scripts/        - python scripts
     |
     go_to_point.py        - pyhton script controlling the robot
@@ -49,64 +18,60 @@ rt2_assignment1/
   src/            - C++ source code
     |
     position_service.cpp  - random position service
-    state_machine.cpp     - finite state machine  
+    state_machine.cpp     - finite state machine
   srv/            - custom services
     !
-    Command.srv           - user interface input
+    Command.srv           - user interface service
     RandomPosition.srv    - random position service
   urdf/           - robot description for Gazebo simulation
-    |  
-    my_robot.urdf         - mobile robot description
-  docs/
+    |
+    my_robot.urdf         - robot description
   CMakeLists.txt  - CMake file
   package.xml     - manifest
->>>>>>> origin/action
 ```
+## Package 
+
 ## Package Description
 
-This package controls a mobile non-holonomic robot with a 'go_to_point' logic, 
-1. a random goal is issued (a _pose_, [x,y,theta]);
-2. the robot orients itself towards the [x,y] destination;
-3. it then drives straight to that position (adjusting the orientation if need be);
-4. having reached the [x,y] goal position the robot turns in place in order to match the goal _theta_;
-5. if the user does not stop the robot GOTO step 1, otherwise stay still until asked to start again, then GOTO step 1;
+This package controls a mobile non-holonomic robot via the 'go_to_point' behaviour. More in detail, a random goal poses is generated and the robot aligns itself towards that point. The robot, then, sets its linear speed to drive to that position and, once that goal position is reached it turns itslef to match requested orientation. 
+Unless the robot is stopped by the used the process continues to loop by generating a new target destination and pose.
+In this specific case, due to the fasct that the robot 'go_to_point' behaviour is here implemented as an action it can be preempted, stoppinng the robot at any time and then restarting it when issuing a new goal.
 
-The user request is here implemented as an action it can be preempted, stoppinng the robot at any time and then restarting it when issuing a new goal.
+## Nodes structure and explanation
 
-## Content Explanation
+Here below is reported the structure of this robot motion control algorithm:
 
-Two nodes are implemented as python scripts
+![package_tree](rt2_action.png)
+
+More in detail, two nodes are implemented as python scripts
 - **go_to_point.py**: the action server managing the robot speed control depending on the goal received.
 - **user_interface.py**:  the simple command line user interface, which sends the requests to start/stop the go_to_point behaviour.
 
-Whilst the last two are C++ based nodes
+While other two nodes have been implemented in C++:
 - **position_service.cpp**: the server generating a random pose [x,y,theta] as a response to a request.
 - **state_machine.cpp**:  the FSM managing the request of a new goal pose when needed, sending it as a goal to 'go_to_point' action server.
 
-## Compiling
+---
 
-The compilation of this package can be carried out typing in the workspace directory of ROS:
+Finally, the control can be applied to a robot simulated using Coppeliasim (see **Requirements**), for which two scenes are here presented
+- **pioneer_scene.ttt**: a simple scene with a Pioneer p3dx non-holonomic mobile robot in an empty environment.
+- **robotnik_scene.ttt**: a simple scene with a Robotnik Summit XL140701 non-holonomic mobile robot in an empty environment.
+
+## Compiling and Running
+
+Compilation can be carried out sourcing the ROS Noetic path and typing:
 
 ```bash
-.../my_ros_ws/$ catkin_make
+path/to/ros_ws/$ catkin_make
 ```
-from a terminal in which the ROS noetic varibles have been properly sourced
 
-## Running
-
-The launch file is provided:
+A launch file has been provided to generate the Gazebo simulation and run all the nodes required for the control of the non-holonomic robot:
 - **sim.launch**: to be used in order to launch all the nodes and the Gazebo simulation.
 ```bash
 path/to/ros_ws/$ roslaunch rt2_assignment1 sim.launch
 ```
-
-## Implementation Details
-
-### StateMachine
-
-The only choice worth of note probably regards the fact that the current robot state can be changed by either the user's input (1: start, -1: stop) or the action reaching its goal (2: action ended): in the latter case the state of the goal objective is retrieved, and a check is made on whether the action was succesful or not. If it succeeded then it starts again by defining a new random goal point, otherwise the robot will stop and wait for new user inputs.
+In this case the Gazebo simulation will automatically start.
 
 ## Requirements
 
-In order to run this package and visualize the rodot control ligic a running istance of **Gazebo** is needed.
-The definition of both the robot and the envront can be retrieved in the folder 'urdf' of this package and in the header of the *sim.launch* file.
+**Gazebo** is required to run the first launch file (the scene definition is presented in this package).
