@@ -44,9 +44,6 @@ int main(int argc, char **argv)
    ros::NodeHandle n;
    ros::ServiceServer service= n.advertiseService("/user_interface", user_interface);
    ros::ServiceClient client_rp = n.serviceClient<rt2_assignment1::RandomPosition>("/position_server");
-   //ros::ServiceClient client_p = n.serviceClient<rt2_assignment1::Position>("/go_to_point");
-   //ac.initSimpleClient(n, "/go_to_point", true)
-   //actionlib::SimpleClientGoalState state;
    actionlib::SimpleActionClient<rt2_assignment1::Control2_1Action> ac("/go_to_point", true);
    
    rt2_assignment1::RandomPosition rp;
