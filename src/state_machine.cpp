@@ -73,7 +73,7 @@ int main(int argc, char **argv)
    rp.request.y_min = -5.0;
    rt2_assignment1::Control2_1Goal goal;
      //wait for the action server to come up
-    while(!ac.waitForServer(ros::Duration(10.0))){ // timeout can be set also for the waiforserrver
+    while(!ac.waitForServer(ros::Duration(10.0))){ // timeout can be set also for the wait for server
         ROS_INFO("Waiting for the go_to_point action server to come up");
     }
    
