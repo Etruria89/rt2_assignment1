@@ -1,3 +1,11 @@
+/**
+ * \file state_machine.cpp
+ * \brief This files does a lot of things
+ * \author Federico Danzi
+ * \date 06/06/2021
+ * 
+*/
+
 #include "ros/ros.h"
 #include "rt2_assignment1/Command.h"
 #include "rt2_assignment1/RandomPosition.h"
