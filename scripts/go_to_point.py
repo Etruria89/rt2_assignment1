@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 ## @package rt2_assignment1
 #	\file go_to_point.py
 #	\brief This file contain the description of the movement of the holonomic robot
@@ -19,6 +17,8 @@
 #
 #	This node define the movememnt of the holonomic robot
 
+
+#! /usr/bin/env python
 
 import rospy
 from geometry_msgs.msg import Twist, Point
@@ -80,7 +80,7 @@ def clbk_odom(msg):
 
 
 ##
-# Service callback of the odometry subscriber
+#  Function to specify the state_ value
 #
 #   
 #   Update the current global state
@@ -95,12 +95,10 @@ def change_state(state):
     print ('State changed to [%s]' % state_)
 
 ##
-#
 #    Function to normalize an angle
 #
 #    Args: angle (float):  angle to be normalized
-#    """
-#
+#    
 # 
 
 def normalize_angle(angle):
@@ -110,7 +108,6 @@ def normalize_angle(angle):
     return angle
 
 ##
-#
 #    Orient the robot in a desired way
 #
 #    Args:  des_yaw (float):  desired yaw
@@ -285,7 +282,7 @@ def go_to_point(goal):
 #    Including :
 #	- the initialization of the "go_to_point"  node
 #	- the publisher for the "\cmd_vel" topic
-#       - the subscriber to the "\odom" topic
+#	- the subscriber to the "\odom" topic
 #	- the action server "\go_to_point"
 #
 
