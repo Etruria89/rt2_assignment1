@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <launch>
 
+
+  <!-- Parameters for modulating the speed of the robot using the slideres -->
+    <arg name="slider_lin_scale" default= "1.0"/>
+    <arg name="slider_ang_scale" default= "1.0"/>
+    <param name="slider_lin_scale" value="$(arg slider_lin_scale)" />
+    <param name="slider_ang_scale" value="$(arg slider_ang_scale)" />
+
+
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="model" default="$(find rt2_assignment1)/urdf/my_robot.urdf" />
 

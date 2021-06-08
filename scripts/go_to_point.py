@@ -83,12 +83,14 @@ def fix_yaw(des_yaw, next_state):
     err_yaw = normalize_angle(des_yaw - yaw_)
     rospy.loginfo(err_yaw)
     twist_msg = Twist()
+    # read parameter server for the sliders
+    slider_ang = rospy.get_param('slider_ang_scale')
     if math.fabs(err_yaw) > yaw_precision_2_:
-        twist_msg.angular.z = kp_a*err_yaw
+        twist_msg.angular.z = slider_ang * (kp_a*err_yaw)
         if twist_msg.angular.z > ub_a:
-            twist_msg.angular.z = ub_a
+            twist_msg.angular.z = slider_ang * (ub_a)
         elif twist_msg.angular.z < lb_a:
-            twist_msg.angular.z = lb_a
+            twist_msg.angular.z = slider_ang * (lb_a)
     pub_.publish(twist_msg)
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_2_:
@@ -111,14 +113,17 @@ def go_straight_ahead(des_pos):
                         pow(des_pos.x - position_.x, 2))
     err_yaw = normalize_angle(desired_yaw - yaw_)
     rospy.loginfo(err_yaw)
-
+    # read parameter server for the sliders
+    slider_ang = rospy.get_param('slider_ang_scale')
+    # read parameter server for the sliders
+    slider_lin = rospy.get_param('slider_lin_scale')
     if err_pos > dist_precision_:
         twist_msg = Twist()
-        twist_msg.linear.x = 0.3+0.5*err_pos
+        twist_msg.linear.x = slider_lin * (0.3+0.5*err_pos)
         if twist_msg.linear.x > ub_d:
-            twist_msg.linear.x = ub_d
+            twist_msg.linear.x = slider_lin * (ub_d)
 
-        twist_msg.angular.z = kp_a*err_yaw
+        twist_msg.angular.z = slider_ang * (kp_a*err_yaw)
         pub_.publish(twist_msg)
     else: # state change conditions
         #print ('Position error: [%s]' % err_pos)
@@ -133,12 +138,14 @@ def fix_final_yaw(des_yaw):
     err_yaw = normalize_angle(des_yaw - yaw_)
     rospy.loginfo(err_yaw)
     twist_msg = Twist()
+    # read parameter server for the sliders
+    slider_ang = rospy.get_param('slider_ang_scale')   
     if math.fabs(err_yaw) > yaw_precision_2_:
-        twist_msg.angular.z = kp_a*err_yaw
+        twist_msg.angular.z = slider_ang * (kp_a*err_yaw)
         if twist_msg.angular.z > ub_a:
-            twist_msg.angular.z = ub_a
+            twist_msg.angular.z = slider_ang * (ub_a)
         elif twist_msg.angular.z < lb_a:
-            twist_msg.angular.z = lb_a
+            twist_msg.angular.z = slider_ang * (lb_a)
     pub_.publish(twist_msg)
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_2_:
