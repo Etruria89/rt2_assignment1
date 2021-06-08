@@ -1,10 +1,35 @@
 /**
  * \file state_machine.cpp
- * \brief This files does a lot of things
+ * \brief This files defines a finite state machine for the control of the holonomic robot
  * \author Federico Danzi
+ * \version 0.1
  * \date 06/06/2021
  * 
-*/
+ * \details
+ * 
+ * Services : <BR>
+ * 		/user_interface
+ * 
+ * Clients : 
+ * 		/position_server 
+ * 
+ * Action Client : 
+ * 		/go_to_point 
+ * 
+ *  Description :
+ *  
+ *  This node implements the finite state machine for the input on the control of 
+ *  the holonomic robot. It includes:
+ *  - An Action client "go_to_point" that interacts with the action
+ *    "Control2_1" to:
+ * 		- set a new goal
+ * 		- check if the goal has been reached
+ * 		- check if the goal has been cancelled 
+ * 		- Define the new state 
+ *  - A Service server that advertise the command line user interface
+* 	- A Service client that requires a new target postion from the 
+* 		/position_server
+ */
 
 #include "ros/ros.h"
 #include "rt2_assignment1/Command.h"
@@ -20,22 +45,22 @@ int state = 0;
 /*
     0 -> static
     1 -> start
-    2 -> end_reached
-    -1 -> interrupt goal
+    2 -> end_reached/cancelled
+   -1 -> interrupt goal
 */
 
 
-	  /****************************************//**
-	  * Service callback setting the start/stop
-	  * robot state
-	  *
-	  *   Service call header (unused).
-	  * \param req (const std::shared_ptr<Command::Request>):
-	  *   Service request, containing the command (string).
-	  * \param res (const std::shared_ptr<Command::Response>):
-	  *   Service response, the value of the 'start' state (bool).
-	  *
-	  ********************************************/ 
+/**
+* Service callback of the user interface Service Server setting the start/stop
+* robot state
+*
+*   Service call header (unused).
+* \param req (const std::shared_ptr<Command::Request>):
+*   Service request, containing the command (string).
+* \param res (const std::shared_ptr<Command::Response>):
+*   Service response, the value of the 'start' state (bool).
+*
+*/ 
 
 bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Command::Response &res){
     if (req.command == "start"){
@@ -47,7 +72,7 @@ bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Com
     return true;
 }
 
-/****************************************//**
+/**
 * Callback launched at the end of the action
 *
 * This function is launched once the goal of
@@ -58,12 +83,30 @@ bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Com
 * \param result (const rt2_assignment1::PoseResultConstPtr&):
 *   The result of the action.
 *
-********************************************/ 
+*/ 
 
 void done(const actionlib::SimpleClientGoalState& goal_state,
                 const rt2_assignment1::Control2_1ResultConstPtr& result){    
     state = 2;
 }
+
+
+/**
+* The main core of the finite state machine that handles the state update
+* 
+* It includes:
+*  	- An Action client "go_to_point" that interacts with the action
+ *    "Control2_1" to:
+ * 		- set a new goal
+ * 		- check if the goal has been reached
+ * 		- check if the goal has been cancelled 
+ * 		- Define the new state 
+ *  - A Service server that advertise the command line user interface
+* 	- A Service client that requires a new target postion from the 
+* 		/position_server
+ */
+*
+*/ 
 
 int main(int argc, char **argv)
 {
@@ -96,7 +139,7 @@ int main(int argc, char **argv)
             	goal.y = rp.response.y;
                	goal.theta = rp.response.theta;
                	std::cout << "\nGoing to the position: x= " << goal.x << " y= " << goal.y << " theta = " << goal.theta << std::endl;
-			/*  Send goal information and monitor the   */
+			/*  Send goal information */
                	ac.sendGoal(goal, &done);
                	state = 0;
                	break;

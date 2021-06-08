@@ -1,6 +1,6 @@
 /**
  * \file position_service.cpp
- * \brief This files does a lot of things
+ * \brief This files creates a service server for definig the robot pose
  * \author Federico Danzi
  * \version 0.1
  * \date 06/06/2021
@@ -49,7 +49,9 @@ double randMToN(double M, double N)
  * \param req (const std::shared_ptr<RandomPosition::Request>):
  *   Service request, containing the x and y ranges.
  * \param res (const std::shared_ptr<RandomPosition::Response>):
- *   Service response, containing the robot pose.
+ *   Service response, containing the robot pose. Including the "x" and "y" position
+ *   bounded between x_min (or y_min) and x_max (or y_max) and its orientation
+ *   "theta" bounded between -3.14 and 3-14
  *
  * 
 */
