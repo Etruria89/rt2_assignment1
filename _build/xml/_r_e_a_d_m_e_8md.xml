@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Research<sp/>Track<sp/>2<sp/>-<sp/>assignment<sp/>1</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">rt2_assignment1/</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>action/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>action<sp/>files</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Control2_1.action<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>action<sp/>goal</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>launch/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>launch<sp/>files</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>sim.launch<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>simulation<sp/>launch</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>scripts/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>python<sp/>scripts</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>go_to_point.py<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>pyhton<sp/>script<sp/>controlling<sp/>the<sp/>robot</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>user_interface.py<sp/><sp/><sp/><sp/><sp/>-<sp/>command<sp/>line<sp/>user<sp/>interface</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>src/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>C++<sp/>source<sp/>code</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>position_service.cpp<sp/><sp/>-<sp/>random<sp/>position<sp/>service</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>state_machine.cpp<sp/><sp/><sp/><sp/><sp/>-<sp/>finite<sp/>state<sp/>machine</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>srv/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>custom<sp/>services</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>!</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Command.srv<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>user<sp/>interface<sp/>service</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>RandomPosition.srv<sp/><sp/><sp/><sp/>-<sp/>random<sp/>position<sp/>service</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>urdf/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>robot<sp/>description<sp/>for<sp/>Gazebo<sp/>simulation</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>my_robot.urdf<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>robot<sp/>description</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>CMakeLists.txt<sp/><sp/>-<sp/>CMake<sp/>file</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>package.xml<sp/><sp/><sp/><sp/><sp/>-<sp/>manifest</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Package<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Package<sp/>Description</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>package<sp/>controls<sp/>a<sp/>mobile<sp/>non-holonomic<sp/>robot<sp/>via<sp/>the<sp/>&apos;go_to_point&apos;<sp/>behaviour.<sp/>More<sp/>in<sp/>detail,<sp/>a<sp/>random<sp/>goal<sp/>poses<sp/>is<sp/>generated<sp/>and<sp/>the<sp/>robot<sp/>aligns<sp/>itself<sp/>towards<sp/>that<sp/>point.<sp/>The<sp/>robot,<sp/>then,<sp/>sets<sp/>its<sp/>linear<sp/>speed<sp/>to<sp/>drive<sp/>to<sp/>that<sp/>position<sp/>and,<sp/>once<sp/>that<sp/>goal<sp/>position<sp/>is<sp/>reached<sp/>it<sp/>turns<sp/>itslef<sp/>to<sp/>match<sp/>requested<sp/>orientation.<sp/></highlight></codeline>
+<codeline><highlight class="normal">Unless<sp/>the<sp/>robot<sp/>is<sp/>stopped<sp/>by<sp/>the<sp/>used<sp/>the<sp/>process<sp/>continues<sp/>to<sp/>loop<sp/>by<sp/>generating<sp/>a<sp/>new<sp/>target<sp/>destination<sp/>and<sp/>pose.</highlight></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>specific<sp/>case,<sp/>due<sp/>to<sp/>the<sp/>fasct<sp/>that<sp/>the<sp/>robot<sp/>&apos;go_to_point&apos;<sp/>behaviour<sp/>is<sp/>here<sp/>implemented<sp/>as<sp/>an<sp/>action<sp/>it<sp/>can<sp/>be<sp/>preempted,<sp/>stoppinng<sp/>the<sp/>robot<sp/>at<sp/>any<sp/>time<sp/>and<sp/>then<sp/>restarting<sp/>it<sp/>when<sp/>issuing<sp/>a<sp/>new<sp/>goal.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Nodes<sp/>structure<sp/>and<sp/>explanation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Here<sp/>below<sp/>is<sp/>reported<sp/>the<sp/>structure<sp/>of<sp/>this<sp/>robot<sp/>motion<sp/>control<sp/>algorithm:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![package_tree](rt2_action.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">More<sp/>in<sp/>detail,<sp/>two<sp/>nodes<sp/>are<sp/>implemented<sp/>as<sp/>python<sp/>scripts</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**go_to_point**:<sp/>(*go_to_point.py*)<sp/>the<sp/>action<sp/>server<sp/>managing<sp/>the<sp/>robot<sp/>speed<sp/>control<sp/>depending<sp/>on<sp/>the<sp/>goal<sp/>received.<sp/>This<sp/>node<sp/>publishes<sp/>on<sp/>the<sp/>topics<sp/>/cmd_vel<sp/>the<sp/>velocity<sp/>of<sp/>the<sp/>robot<sp/>and<sp/>read<sp/>its<sp/>position<sp/>by<sp/>subscribing<sp/>the<sp/>topic<sp/>&apos;/odom&apos;<sp/></highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**userinterface**:<sp/>(*.user_interfacepy*)<sp/><sp/>the<sp/>command<sp/>line<sp/>user<sp/>interface,<sp/>which<sp/>sends<sp/>the<sp/>requests<sp/>to<sp/>start<sp/>and<sp/>stop<sp/>the<sp/>go_to_point<sp/>behaviour.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">While<sp/>other<sp/>two<sp/>nodes<sp/>have<sp/>been<sp/>implemented<sp/>in<sp/>C++:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**positionServer**:<sp/>(*position_serivice.cpp*)<sp/>the<sp/>server<sp/>node<sp/>generating<sp/>a<sp/>random<sp/>pose<sp/>once<sp/>requested.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**stateMachine**:<sp/><sp/>(*state_machine.cpp*)<sp/>the<sp/>finite<sp/>state<sp/>machine<sp/>managing<sp/>the<sp/>request<sp/>of<sp/>a<sp/>new<sp/>goal<sp/>pose<sp/>when<sp/>needed,<sp/>sending<sp/>it<sp/>as<sp/>a<sp/>goal<sp/>to<sp/>&apos;go_to_point&apos;<sp/>action<sp/>server.</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Compiling<sp/>and<sp/>Running</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Compilation<sp/>can<sp/>be<sp/>carried<sp/>out<sp/>sourcing<sp/>the<sp/>ROS<sp/>Noetic<sp/>path<sp/>and<sp/>typing:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">path/to/ros_ws/$<sp/>catkin_make</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>launch<sp/>file<sp/>has<sp/>been<sp/>provided<sp/>to<sp/>generate<sp/>the<sp/>Gazebo<sp/>simulation<sp/>and<sp/>run<sp/>all<sp/>the<sp/>nodes<sp/>required<sp/>for<sp/>the<sp/>control<sp/>of<sp/>the<sp/>non-holonomic<sp/>robot:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**sim.launch**:<sp/>to<sp/>be<sp/>used<sp/>in<sp/>order<sp/>to<sp/>launch<sp/>all<sp/>the<sp/>nodes<sp/>and<sp/>the<sp/>Gazebo<sp/>simulation.</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">path/to/ros_ws/$<sp/>roslaunch<sp/>rt2_assignment1<sp/>sim.launch</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>case<sp/>the<sp/>Gazebo<sp/>simulation<sp/>will<sp/>automatically<sp/>start.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Requirements</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Gazebo**<sp/>is<sp/>required<sp/>to<sp/>run<sp/>the<sp/>first<sp/>launch<sp/>file<sp/>(the<sp/>scene<sp/>definition<sp/>is<sp/>presented<sp/>in<sp/>this<sp/>package).</highlight></codeline>
+    </programlisting>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>
