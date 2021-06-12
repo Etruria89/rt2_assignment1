@@ -37,7 +37,7 @@
 </sect1>
 <sect1 id="md__r_e_a_d_m_e_1autotoc_md2">
 <title>Package Description</title>
-<para>This package controls a mobile non-holonomic robot via the &apos;go_to_point&apos; behaviour. More in detail, a random goal poses is generated and the robot aligns itself towards that point. The robot, then, sets its linear speed to drive to that position and, once that goal position is reached it turns itslef to match requested orientation. Unless the robot is stopped by the used the process continues to loop by generating a new target destination and pose. In this specific case, due to the fasct that the robot &apos;go_to_point&apos; behaviour is here implemented as an action it can be preempted, stoppinng the robot at any time and then restarting it when issuing a new goal.</para>
+<para>This package controls a mobile non-holonomic robot via the &apos;<ref refid="namespacego__to__point" kindref="compound">go_to_point</ref>&apos; behaviour. More in detail, a random goal poses is generated and the robot aligns itself towards that point. The robot, then, sets its linear speed to drive to that position and, once that goal position is reached it turns itslef to match requested orientation. Unless the robot is stopped by the used the process continues to loop by generating a new target destination and pose. In this specific case, due to the fasct that the robot &apos;<ref refid="namespacego__to__point" kindref="compound">go_to_point</ref>&apos; behaviour is here implemented as an action it can be preempted, stoppinng the robot at any time and then restarting it when issuing a new goal.</para>
 </sect1>
 <sect1 id="md__r_e_a_d_m_e_1autotoc_md3">
 <title>Nodes structure and explanation</title>
@@ -45,13 +45,13 @@
 <para><image type="html" name="rt2_action.png" inline="yes"></image>
 </para>
 <para>More in detail, two nodes are implemented as python scripts<itemizedlist>
-<listitem><para><bold>go_to_point</bold>: (<emphasis>go_to_point.py</emphasis>) the action server managing the robot speed control depending on the goal received. This node publishes on the topics /cmd_vel the velocity of the robot and read its position by subscribing the topic &apos;/odom&apos;</para>
-</listitem><listitem><para><bold>userinterface</bold>: (*.user_interfacepy*) the command line user interface, which sends the requests to start and stop the go_to_point behaviour.</para>
+<listitem><para><bold><ref refid="namespacego__to__point" kindref="compound">go_to_point</ref></bold>: (<emphasis>go_to_point.py</emphasis>) the action server managing the robot speed control depending on the goal received. This node publishes on the topics /cmd_vel the velocity of the robot and read its position by subscribing the topic &apos;/odom&apos;</para>
+</listitem><listitem><para><bold>userinterface</bold>: (*.user_interfacepy*) the command line user interface, which sends the requests to start and stop the <ref refid="namespacego__to__point" kindref="compound">go_to_point</ref> behaviour.</para>
 </listitem></itemizedlist>
 </para>
 <para>While other two nodes have been implemented in C++:<itemizedlist>
 <listitem><para><bold>positionServer</bold>: (<emphasis>position_serivice.cpp</emphasis>) the server node generating a random pose once requested.</para>
-</listitem><listitem><para><bold>stateMachine</bold>: (<emphasis>state_machine.cpp</emphasis>) the finite state machine managing the request of a new goal pose when needed, sending it as a goal to &apos;go_to_point&apos; action server.</para>
+</listitem><listitem><para><bold>stateMachine</bold>: (<emphasis><ref refid="state__machine_8cpp" kindref="compound">state_machine.cpp</ref></emphasis>) the finite state machine managing the request of a new goal pose when needed, sending it as a goal to &apos;<ref refid="namespacego__to__point" kindref="compound">go_to_point</ref>&apos; action server.</para>
 </listitem></itemizedlist>
 </para>
 </sect1>

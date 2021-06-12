@@ -39,9 +39,9 @@ GoToPoint Module
 Position Service
 ================
 .. doxygenfile:: position_service.cpp
- :project: /root/my_ros_ws/src/rt2_assignment1
+ :project: rt2_assignment1
     
 State Machine
-================
-.. doxygenfile:: position_service.cpp
- :project: /root/my_ros_ws/src/rt2_assignment1
+=============
+.. doxygenfile:: state_machine.cpp
+ :project: rt2_assignment1

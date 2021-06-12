@@ -24,7 +24,7 @@
    <div id="projectname">rt2_assignment1
    &#160;<span id="projectnumber">1.0</span>
    </div>
-   <div id="projectbrief">2t2_assignment1_Shpinx_Documentation</div>
+   <div id="projectbrief">rt2 assignment1 Shpinx Documentation</div>
   </td>
  </tr>
  </tbody>
@@ -96,18 +96,18 @@ $(function() {
 Package</h1>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Package Description</h1>
-<p>This package controls a mobile non-holonomic robot via the 'go_to_point' behaviour. More in detail, a random goal poses is generated and the robot aligns itself towards that point. The robot, then, sets its linear speed to drive to that position and, once that goal position is reached it turns itslef to match requested orientation. Unless the robot is stopped by the used the process continues to loop by generating a new target destination and pose. In this specific case, due to the fasct that the robot 'go_to_point' behaviour is here implemented as an action it can be preempted, stoppinng the robot at any time and then restarting it when issuing a new goal.</p>
+<p>This package controls a mobile non-holonomic robot via the '<a class="el" href="namespacego__to__point.html">go_to_point</a>' behaviour. More in detail, a random goal poses is generated and the robot aligns itself towards that point. The robot, then, sets its linear speed to drive to that position and, once that goal position is reached it turns itslef to match requested orientation. Unless the robot is stopped by the used the process continues to loop by generating a new target destination and pose. In this specific case, due to the fasct that the robot '<a class="el" href="namespacego__to__point.html">go_to_point</a>' behaviour is here implemented as an action it can be preempted, stoppinng the robot at any time and then restarting it when issuing a new goal.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Nodes structure and explanation</h1>
 <p>Here below is reported the structure of this robot motion control algorithm:</p>
 <p><img src="rt2_action.png" alt="package_tree" class="inline"/></p>
 <p>More in detail, two nodes are implemented as python scripts</p><ul>
-<li><b>go_to_point</b>: (<em>go_to_point.py</em>) the action server managing the robot speed control depending on the goal received. This node publishes on the topics /cmd_vel the velocity of the robot and read its position by subscribing the topic '/odom'</li>
-<li><b>userinterface</b>: (*.user_interfacepy*) the command line user interface, which sends the requests to start and stop the go_to_point behaviour.</li>
+<li><b><a class="el" href="namespacego__to__point.html">go_to_point</a></b>: (<em>go_to_point.py</em>) the action server managing the robot speed control depending on the goal received. This node publishes on the topics /cmd_vel the velocity of the robot and read its position by subscribing the topic '/odom'</li>
+<li><b>userinterface</b>: (*.user_interfacepy*) the command line user interface, which sends the requests to start and stop the <a class="el" href="namespacego__to__point.html">go_to_point</a> behaviour.</li>
 </ul>
 <p>While other two nodes have been implemented in C++:</p><ul>
 <li><b>positionServer</b>: (<em>position_serivice.cpp</em>) the server node generating a random pose once requested.</li>
-<li><b>stateMachine</b>: (<em>state_machine.cpp</em>) the finite state machine managing the request of a new goal pose when needed, sending it as a goal to 'go_to_point' action server.</li>
+<li><b>stateMachine</b>: (<em><a class="el" href="state__machine_8cpp.html" title="This files defines a finite state machine for the control of the holonomic robot.">state_machine.cpp</a></em>) the finite state machine managing the request of a new goal pose when needed, sending it as a goal to '<a class="el" href="namespacego__to__point.html">go_to_point</a>' action server.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Compiling and Running</h1>

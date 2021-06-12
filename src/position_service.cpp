@@ -44,8 +44,6 @@ double randMToN(double M, double N)
 /**
  * \brief Service callback to define the robot target pose
  * 			  
- * \param request_header (const std::shared_ptr<rmw_request_id_t>):
- *   Service call header (unused).
  * \param req (const std::shared_ptr<RandomPosition::Request>):
  *   Service request, containing the x and y ranges.
  * \param res (const std::shared_ptr<RandomPosition::Response>):

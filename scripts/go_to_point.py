@@ -79,8 +79,8 @@ def clbk_odom(msg):
 
 def change_state(state):
     """
-    
-    Function to specify the state_ value
+
+    Function to specify the state value
     
     Update the current global state
     

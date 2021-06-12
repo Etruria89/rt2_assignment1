@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['research_20track_202_20_2d_20assignment_201_0',['Research Track 2 - assignment 1',['../md__r_e_a_d_m_e.html',1,'']]]
+  ['change_5fstate_0',['change_state',['../namespacego__to__point.html#a31ee48e5cae36821049b572a96b7c8be',1,'go_to_point']]],
+  ['clbk_5fodom_1',['clbk_odom',['../namespacego__to__point.html#a36304a9f313b0579f7fc69fa01695524',1,'go_to_point']]]
 ];
