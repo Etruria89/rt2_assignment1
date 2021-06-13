@@ -24,8 +24,9 @@ rt2_assignment1/
   urdf/           - robot description for Gazebo simulation
     |
     my_robot.urdf         - robot description
-  CMakeLists.txt  - CMake file
-  package.xml     - manifest
+  CMakeLists.txt    - CMake file
+  package.xml       - manifest
+  rt2_jupyter.ipynb - jupyter notebook for the control and monitorin of the robot
 ```
 ## Package 
 
@@ -68,3 +69,16 @@ In this case the Gazebo simulation will automatically start.
 ## Requirements
 
 **Gazebo** is required to run the first launch file (the scene definition is presented in this package).
+
+## Jupyter execution
+In order to run the jupyter notebook **rt2_jupyter.ipynb** for the control and the monitoring of the robot the following steps has to be followed:
+- Open a terminal  and source ROS Noetic required environmental variables
+- Run ros simulation via the command: 
+```bash
+.../my_ros_ws/src/rt2_assignment1# roslaunch rt2_assignment1 ros2_sim.launch
+```
+- Open a second terminal and source  ROs Noetic required environmental varaibles
+- Move in the repository where the jupyter notebook is stored and type
+```bash
+.../my_ros_ws/src/rt2_assignment1# jupyter notebook --allow-root
+```
