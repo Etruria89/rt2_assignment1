@@ -315,16 +315,164 @@ the robot behaviour</p>
 </div>
 <div class="section" id="position-service">
 <h1>Position Service<a class="headerlink" href="#position-service" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfile: Unable to find project ‘rt2_assignment1’ in breathe_projects dictionary</p>
+<p>This files creates a service server for definig the robot pose. </p>
+<p><p>Services :</p>
+<p>/position_server</p>
+<dl class="simple">
+<dt><strong>Author</strong></dt><dd><p>Federico Danzi </p>
+</dd>
+<dt><strong>Version</strong></dt><dd><p>0.1 </p>
+</dd>
+<dt><strong>Date</strong></dt><dd><p>06/06/2021</p>
+</dd>
+</dl>
+</p>
+<p>Description :</p>
+<p>This node advertise a position service. When the service is requested, a request containing minimum and maximum values for the x and y position is used to generate a random position between x (or y) min and x (or y) max. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48randMToNdd">
+<span id="_CPPv38randMToNdd"></span><span id="_CPPv28randMToNdd"></span><span id="randMToN__double.double"></span><span class="target" id="position__service_8cpp_1a10f83119b77a8fbd085a5550955f85ff"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">randMToN</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">M</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48randMToNdd" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generate a bounded random number. </p>
+<p>
+Description :</p>
+<p>This function genearte a random number between M and N </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> – (double): Lower bound of the generated random number. </p></li>
+<li><p><strong>N</strong> – (double): Upper bound of the generated random number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>randMToN (double): random number, between M and N.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48myrandomRN15rt2_assignment114RandomPosition7RequestERN15rt2_assignment114RandomPosition8ResponseE">
+<span id="_CPPv38myrandomRN15rt2_assignment114RandomPosition7RequestERN15rt2_assignment114RandomPosition8ResponseE"></span><span id="_CPPv28myrandomRN15rt2_assignment114RandomPosition7RequestERN15rt2_assignment114RandomPosition8ResponseE"></span><span id="myrandom__rt2_assignment1::RandomPosition::RequestR.rt2_assignment1::RandomPosition::ResponseR"></span><span class="target" id="position__service_8cpp_1ab65b9ff5368189ad34fe4989d50742e4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">myrandom</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RandomPosition</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">req</span></span>, <span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RandomPosition</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">res</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48myrandomRN15rt2_assignment114RandomPosition7RequestERN15rt2_assignment114RandomPosition8ResponseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Service callback to define the robot target pose. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>req</strong> – (const std::shared_ptr&lt;RandomPosition::Request&gt;): Service request, containing the x and y ranges. </p></li>
+<li><p><strong>res</strong> – (const std::shared_ptr&lt;RandomPosition::Response&gt;): Service response, containing the robot pose. Including the “x” and “y” position bounded between x_min (or y_min) and x_max (or y_max) and its orientation “theta” bounded between -3.14 and 3-14 </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv44mainiPPc">
+<span id="_CPPv34mainiPPc"></span><span id="_CPPv24mainiPPc"></span><span id="main__i.cPP"></span><span class="target" id="position__service_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">main</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44mainiPPc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Service Server definition to generate a random position. </p>
+<p>This server provides the ‘/position_server’ service via the node random_position_server. </p>
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="state-machine">
 <h1>State Machine<a class="headerlink" href="#state-machine" title="Permalink to this headline">¶</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfile: Unable to find project ‘rt2_assignment1’ in breathe_projects dictionary</p>
+<p>This files defines a finite state machine for the control of the holonomic robot. </p>
+<p><p>Services :</p>
+<p>/user_interface</p>
+<dl class="simple">
+<dt><strong>Author</strong></dt><dd><p>Federico Danzi </p>
+</dd>
+<dt><strong>Version</strong></dt><dd><p>0.1 </p>
+</dd>
+<dt><strong>Date</strong></dt><dd><p>06/06/2021</p>
+</dd>
+</dl>
+</p>
+<p>Clients : /position_server</p>
+<p>Action Client : /go_to_point</p>
+<p>Description :</p>
+<p>This node implements the finite state machine for the input on the control of the holonomic robot. It includes:<ul class="simple">
+<li><p>An Action client “go_to_point” that interacts with the action “Control2_1” to:<ul>
+<li><p>set a new goal</p></li>
+<li><p>check if the goal has been reached</p></li>
+<li><p>check if the goal has been cancelled</p></li>
+<li><p>Define the new state</p></li>
+</ul>
+</p></li>
+<li><p>A Service server that advertise the command line user interface</p></li>
+<li><p>A Service client that requires a new target postion from the /position_server </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414user_interfaceRN15rt2_assignment17Command7RequestERN15rt2_assignment17Command8ResponseE">
+<span id="_CPPv314user_interfaceRN15rt2_assignment17Command7RequestERN15rt2_assignment17Command8ResponseE"></span><span id="_CPPv214user_interfaceRN15rt2_assignment17Command7RequestERN15rt2_assignment17Command8ResponseE"></span><span id="user_interface__rt2_assignment1::Command::RequestR.rt2_assignment1::Command::ResponseR"></span><span class="target" id="state__machine_8cpp_1a1a9543636935547580c0657f4c7c0c2b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_interface</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Command</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">req</span></span>, <span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Command</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">res</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414user_interfaceRN15rt2_assignment17Command7RequestERN15rt2_assignment17Command8ResponseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Service callback of the user interface Service Server setting the start/stop robot state</p>
+<p>Service call header (unused). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>req</strong> – (const std::shared_ptr&lt;Command::Request&gt;): Service request, containing the command (string). </p></li>
+<li><p><strong>res</strong> – (const std::shared_ptr&lt;Command::Response&gt;): Service response, the value of the ‘start’ state (bool). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv44doneRKN9actionlib21SimpleClientGoalStateERKN15rt2_assignment124Control2_1ResultConstPtrE">
+<span id="_CPPv34doneRKN9actionlib21SimpleClientGoalStateERKN15rt2_assignment124Control2_1ResultConstPtrE"></span><span id="_CPPv24doneRKN9actionlib21SimpleClientGoalStateERKN15rt2_assignment124Control2_1ResultConstPtrE"></span><span id="done__actionlib::SimpleClientGoalStateCR.rt2_assignment1::Control2_1ResultConstPtrCR"></span><span class="target" id="state__machine_8cpp_1af153587caa3d79dc57717d77da86ed00"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">done</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">actionlib</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">SimpleClientGoalState</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">goal_state</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Control2_1ResultConstPtr</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">result</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44doneRKN9actionlib21SimpleClientGoalStateERKN15rt2_assignment124Control2_1ResultConstPtrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Callback launched at the end of the action</p>
+<p>This function is launched once the goal of of the action is reached.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>goal_state</strong> – (const actionlib::SimpleClientGoalState&amp;): The goal state reached. </p></li>
+<li><p><strong>result</strong> – (const rt2_assignment1::PoseResultConstPtr&amp;): The result of the action. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="state__machine_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">main</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>The main core of the finite state machine that handles the state update</p>
+<p>It includes:<ul class="simple">
+<li><p>An Action client “go_to_point” that interacts with the action “Control2_1” to:<ul>
+<li><p>set a new goal</p></li>
+<li><p>check if the goal has been reached</p></li>
+<li><p>check if the goal has been cancelled</p></li>
+<li><p>Define the new state</p></li>
+</ul>
+</p></li>
+</ul>
+</p>
+<p>A Service server that advertise the command line user interface<ul class="simple">
+<li><p>A Service client that requires a new target postion from the /position_server </p></li>
+</ul>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv45start">
+<span id="_CPPv35start"></span><span id="_CPPv25start"></span><span id="start__b"></span><span class="target" id="state__machine_8cpp_1ab376b87f96a574a793c03c53e75afec8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv45start" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv44stop">
+<span id="_CPPv34stop"></span><span id="_CPPv24stop"></span><span id="stop__b"></span><span class="target" id="state__machine_8cpp_1a53a2d16dac430353052f49aaa0cce34a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stop</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv44stop" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv45state">
+<span id="_CPPv35state"></span><span id="_CPPv25state"></span><span id="state__i"></span><span class="target" id="state__machine_8cpp_1a89f234133d3efe315836311cbf21c64b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">state</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><a class="headerlink" href="#_CPPv45state" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 

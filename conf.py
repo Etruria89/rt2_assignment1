@@ -80,11 +80,9 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 # --Options for todo extension ----------------------------------------------# If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
-# --Options for 
-breathebreathe_projects = {
+# --Options for breathe 
+breathe_projects = {
 	"rt2_assignment1": "_build/xml/"
 }
 breathe_default_project = "rt2_assignment1"
 breathe_default_members = ('members', 'undoc-members')
-
-
