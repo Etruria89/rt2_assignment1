@@ -68,7 +68,7 @@
     <member refid="state__machine_8cpp_1a89f234133d3efe315836311cbf21c64b" kind="variable"><name>state</name></member>
     <member refid="state__machine_8cpp_1a1a9543636935547580c0657f4c7c0c2b" kind="function"><name>user_interface</name></member>
     <member refid="state__machine_8cpp_1af153587caa3d79dc57717d77da86ed00" kind="function"><name>done</name></member>
-    <member refid="state__machine_8cpp_1a4ed8825e33b2e8f99b2f3c61971684ee" kind="function"><name>main</name></member>
+    <member refid="state__machine_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
   </compound>
   <compound refid="md__r_e_a_d_m_e" kind="page"><name>md_README</name>
   </compound>

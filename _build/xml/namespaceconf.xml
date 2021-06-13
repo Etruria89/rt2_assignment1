@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="conf.py" line="76" column="1" bodyfile="conf.py" bodystart="76" bodyend="-1"/>
+        <location file="conf.py" line="78" column="1" bodyfile="conf.py" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="conf_8py_1a8fe7f0d85f975f4ecba5cb6066959a09" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="conf.py" line="79" column="1" bodyfile="conf.py" bodystart="79" bodyend="-1"/>
+        <location file="conf.py" line="81" column="1" bodyfile="conf.py" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="conf_8py_1a66db374a7f36de6092cc143de3cc80c9" prot="public" static="no" mutable="no">
         <type>dictionary</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="conf.py" line="82" column="1" bodyfile="conf.py" bodystart="82" bodyend="-1"/>
+        <location file="conf.py" line="84" column="1" bodyfile="conf.py" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="conf_8py_1a6eba2d2c7ae923054b1c49e686ec89b9" prot="public" static="no" mutable="no">
         <type>string</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="conf.py" line="85" column="1" bodyfile="conf.py" bodystart="85" bodyend="-1"/>
+        <location file="conf.py" line="87" column="1" bodyfile="conf.py" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="conf_8py_1a54585428ce84441199d9dfd7087e2243" prot="public" static="no" mutable="no">
         <type>tuple</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="conf.py" line="86" column="1" bodyfile="conf.py" bodystart="86" bodyend="-1"/>
+        <location file="conf.py" line="88" column="1" bodyfile="conf.py" bodystart="88" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

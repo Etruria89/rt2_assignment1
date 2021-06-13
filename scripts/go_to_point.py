@@ -1,4 +1,5 @@
 """ 
+
 ..module: go_to_point
     :platform:Unix
     :synopsis: This file contain the description of the movement of the holonomic robot
@@ -14,6 +15,7 @@ Action Server: <BR>
     \go_to_point
 
 This node define the movememnt of the holonomic robot using the go_to_point algorithm
+
 """
 
 #! /usr/bin/env python

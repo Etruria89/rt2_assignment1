@@ -11,7 +11,8 @@ This files defines a finite state machine for the control of the holonomic robot
 {\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
 {\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
 {\ttfamily \#include $<$rt2\+\_\+assignment1/\+Control2\+\_\+1\+Action.\+h$>$}\newline
-Include dependency graph for state\+\_\+machine.\+cpp\+:\nopagebreak
+Include dependency graph for state\+\_\+machine.\+cpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -25,7 +26,7 @@ bool \mbox{\hyperlink{state__machine_8cpp_a1a9543636935547580c0657f4c7c0c2b}{use
 \item 
 void \mbox{\hyperlink{state__machine_8cpp_af153587caa3d79dc57717d77da86ed00}{done}} (const actionlib\+::\+Simple\+Client\+Goal\+State \&goal\+\_\+state, const rt2\+\_\+assignment1\+::\+Control2\+\_\+1\+Result\+Const\+Ptr \&result)
 \item 
-$\ast$$\ast$int \mbox{\hyperlink{state__machine_8cpp_a4ed8825e33b2e8f99b2f3c61971684ee}{main}} (int argc, char $\ast$$\ast$argv)
+int \mbox{\hyperlink{state__machine_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -93,11 +94,11 @@ This function is launched once the goal of of the action is reached.
 {\em result} & (const rt2\+\_\+assignment1\+::\+Pose\+Result\+Const\+Ptr\&)\+: The result of the action. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{state__machine_8cpp_a4ed8825e33b2e8f99b2f3c61971684ee}\label{state__machine_8cpp_a4ed8825e33b2e8f99b2f3c61971684ee}} 
+\mbox{\Hypertarget{state__machine_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{state__machine_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
 \index{state\_machine.cpp@{state\_machine.cpp}!main@{main}}
 \index{main@{main}!state\_machine.cpp@{state\_machine.cpp}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily $\ast$ $\ast$ int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
 
 The main core of the finite state machine that handles the state update
 
