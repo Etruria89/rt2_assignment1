@@ -105,8 +105,6 @@ void done(const actionlib::SimpleClientGoalState& goal_state,
 * 	- A Service client that requires a new target postion from the 
 * 		/position_server
  */
-*
-*/ 
 
 int main(int argc, char **argv)
 {
