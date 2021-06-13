@@ -49,6 +49,8 @@ While other two nodes have been implemented in C++:
 - **positionServer**: (*position_serivice.cpp*) the server node generating a random pose once requested.
 - **stateMachine**:  (*state_machine.cpp*) the finite state machine managing the request of a new goal pose when needed, sending it as a goal to 'go_to_point' action server.
 
+More detail a bout the package can be found into its [documentation page](https://etruria89.github.io/rt2_assignment1/). 
+
 
 ## Compiling and Running
 
