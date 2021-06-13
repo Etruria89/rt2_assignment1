@@ -65,6 +65,7 @@ In order to make this package communicate with the ROS1 three steps are required
 ```bash
 .../my_ros_ws/src/rt2_assignment1# roslaunch rt2_assignment1 ros2_sim.launch
 ```
+Note: The main branch has to be used for the simulation in ROS1
 
 2. Run the ros1_bridge package in a teerminal with both ROS1 and ROS2 sourced:
 ```bash
